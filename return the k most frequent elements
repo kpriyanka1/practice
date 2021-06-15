@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+/*
+* Given a non-empty list of words, return the k most frequent elements.
+
+Your answer should be sorted by frequency from highest to lowest. If two words have the same frequency, 
+then the word with the lower alphabetical order comes first.
+
+Example 1:
+Input: ["i", "love", "leetcode", "i", "love", "coding"], k = 2
+Output: ["i", "love"]
+Explanation: "i" and "love" are the two most frequent words.
+    Note that "i" comes before "love" due to a lower alphabetical order.
+* 
+* */
+public class Words {
+
+
+    public static void main(String[] args) {
+
+        HashMap<String,Integer> hmap = new HashMap();
+
+        String [] words = {"the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"};
+
+        for (String str: words) {
+            /*getOrDefault used to get the value mapped with specified key ["str" in this case].
+             If no value is mapped with the provided key then the default (str,0 ) & "0" is default value value is returned.*/
+
+            hmap.put(str, hmap.getOrDefault(str, 0) + 1);
+        }
+
+        List<String> candidates = new ArrayList(hmap.keySet());
+
+        System.out.println(candidates);
+        Collections.sort(candidates, (w1, w2) -> hmap.get(w1) != hmap.get(w2) ?
+                hmap.get(w2) - hmap.get(w1) : w1.compareTo(w2));
+        System.out.println(candidates.subList(0,3));
+
+
+    }
+}
